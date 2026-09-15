@@ -1,0 +1,784 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A backend-agnostic protocol for authenticating a Minecraft account over HTTP.">
+      
+      
+      
+        <link rel="canonical" href="https://deftu.github.io/minecraft-identity-protocol/dev/">
+      
+      
+      
+        <link rel="next" href="spec/">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
+    
+    
+      
+        <title>Minecraft Identity Protocol</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#minecraft-identity-protocol-mip-overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Minecraft Identity Protocol" class="md-header__button md-logo" aria-label="Minecraft Identity Protocol" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Minecraft Identity Protocol
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Deftu/minecraft-identity-protocol" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Deftu/minecraft-identity-protocol
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Minecraft Identity Protocol" class="md-nav__button md-logo" aria-label="Minecraft Identity Protocol" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Minecraft Identity Protocol
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Deftu/minecraft-identity-protocol" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Deftu/minecraft-identity-protocol
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem-this-solves" class="md-nav__link">
+    <span class="md-ellipsis">
+      The problem this solves
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whos-involved" class="md-nav__link">
+    <span class="md-ellipsis">
+      Who's involved
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-ways-to-log-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      Two ways to log in
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Two ways to log in">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-game-verification-for-mods" class="md-nav__link">
+    <span class="md-ellipsis">
+      In-game verification (for mods)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#browser-login-for-websites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Browser login (for websites)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-comes-out-of-either-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      What comes out of either flow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sessions-not-raw-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sessions, not raw identity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linking-accounts-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linking accounts (optional)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-in-plain-terms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security, in plain terms
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-optional-vs-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's optional vs. required
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="spec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Specification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Changelog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem-this-solves" class="md-nav__link">
+    <span class="md-ellipsis">
+      The problem this solves
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whos-involved" class="md-nav__link">
+    <span class="md-ellipsis">
+      Who's involved
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-ways-to-log-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      Two ways to log in
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Two ways to log in">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-game-verification-for-mods" class="md-nav__link">
+    <span class="md-ellipsis">
+      In-game verification (for mods)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#browser-login-for-websites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Browser login (for websites)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-comes-out-of-either-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      What comes out of either flow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sessions-not-raw-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sessions, not raw identity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linking-accounts-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linking accounts (optional)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-in-plain-terms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security, in plain terms
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-optional-vs-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's optional vs. required
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/Deftu/minecraft-identity-protocol/edit/main/docs/index.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="minecraft-identity-protocol-mip-overview">Minecraft Identity Protocol (MIP) — Overview<a class="headerlink" href="#minecraft-identity-protocol-mip-overview" title="Permanent link">&para;</a></h1>
+<h2 id="the-problem-this-solves">The problem this solves<a class="headerlink" href="#the-problem-this-solves" title="Permanent link">&para;</a></h2>
+<p>If you've ever built a mod, plugin, or website that needed to answer "is this
+really the Minecraft player they claim to be?", you've probably run into the
+fact that there's no single standard way to do it. Depending on your setup you
+end up either:</p>
+<ul>
+<li>Verifying a player from inside the game, using Mojang's servers, or</li>
+<li>Sending a player through a Microsoft login page from a browser,</li>
+</ul>
+<p>and these two paths look nothing alike, use different APIs, and are easy to
+get subtly wrong (session fixation, replay attacks, leaking tokens into logs,
+etc.) — mistakes that are hard to spot in review and only show up as security
+incidents later.</p>
+<p>MIP standardizes both paths behind one shared design, so a backend
+implementing it once supports both a "verify from inside the game" flow and a
+"log in with Minecraft" browser flow, and always ends up with the player's
+identity in the same shape, handled the same way, no matter which path they
+came in through.</p>
+<p>Think of it as something like "Sign in with Google," but for Minecraft
+accounts, with an extra in-game option a browser-based standard wouldn't
+have.</p>
+<h2 id="whos-involved">Who's involved<a class="headerlink" href="#whos-involved" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Player</strong> — the person.</li>
+<li><strong>Client</strong> — whatever is acting for the player: a mod/launcher, or a
+  browser.</li>
+<li><strong>Backend</strong> (the "Relying Party" in the spec) — the server that wants to
+  know who the player is. This is <em>not</em> a Minecraft server the player is
+  connected to — it's an ordinary web backend, reached over HTTPS, that a mod
+  or website talks to.</li>
+<li><strong>Mojang / Microsoft</strong> — the actual source of truth. MIP doesn't replace
+  Mojang's or Microsoft's login systems; it just wraps the "ask them, get an
+  answer" step in a consistent, safer envelope.</li>
+</ul>
+<h2 id="two-ways-to-log-in">Two ways to log in<a class="headerlink" href="#two-ways-to-log-in" title="Permanent link">&para;</a></h2>
+<h3 id="in-game-verification-for-mods">In-game verification (for mods)<a class="headerlink" href="#in-game-verification-for-mods" title="Permanent link">&para;</a></h3>
+<p>Used when a mod is already running inside an active game session and just
+needs to prove that to its own backend — no browser involved.</p>
+<ol>
+<li>The mod asks the backend for a one-time challenge.</li>
+<li>The mod makes Minecraft's normal "join a server" call, using that
+   challenge value — this is the same mechanism vanilla Minecraft always uses
+   when connecting to any server, just aimed at the backend instead.</li>
+<li>The mod tells the backend "I did that," and the backend checks with
+   Mojang whether it actually happened.</li>
+<li>If it checks out, the backend hands the mod a session to use from then on.</li>
+</ol>
+<p>This never touches a browser and never requires the mod to actually join a
+multiplayer server.</p>
+<h3 id="browser-login-for-websites">Browser login (for websites)<a class="headerlink" href="#browser-login-for-websites" title="Permanent link">&para;</a></h3>
+<p>Used for a website, dashboard, or store that wants a "log in with Minecraft"
+button, with no mod involved.</p>
+<ol>
+<li>The site sends the player's browser to Microsoft's login page.</li>
+<li>The player logs in there (not on the site itself).</li>
+<li>Microsoft sends the browser back with proof of login.</li>
+<li>The backend exchanges that proof, behind the scenes, through Microsoft's
+   and Xbox's systems, ending with a verified Minecraft profile.</li>
+<li>The backend hands the browser a session, usually as a cookie.</li>
+</ol>
+<p>There's also a shortcut for tools that already have a Microsoft login token
+from doing something else first (like a launcher) — they can skip the
+browser redirect and hand that token straight to the backend instead.</p>
+<h2 id="what-comes-out-of-either-flow">What comes out of either flow<a class="headerlink" href="#what-comes-out-of-either-flow" title="Permanent link">&para;</a></h2>
+<p>Regardless of which path was used, the backend ends up with the same basic
+set of facts about the player:</p>
+<ul>
+<li>Their stable account ID (this doesn't change even if they rename)</li>
+<li>Their current username</li>
+<li>Their skin/cape, if available</li>
+<li>Which method was used to verify them</li>
+</ul>
+<p>That last point matters for one specific design decision: <strong>neither method is
+treated as "more trusted" than the other.</strong> A player verified through the
+in-game flow and a player verified through the browser flow are equally
+legitimate — the backend just needs to know which one happened, for its own
+logging/debugging.</p>
+<h2 id="sessions-not-raw-identity">Sessions, not raw identity<a class="headerlink" href="#sessions-not-raw-identity" title="Permanent link">&para;</a></h2>
+<p>The backend never just hands the player's raw verified profile back and says
+"use this to prove who you are from now on." Instead, it issues a proper
+<strong>session</strong> — a short-lived token/cookie meant specifically for that purpose,
+the same way most login systems work. This keeps the actual verification
+result (which involved talking to Mojang/Microsoft) separate from ongoing
+"is this still the same logged-in session" checks, which is faster and safer.</p>
+<p>Sessions expire fairly quickly by design. To avoid making players log in
+again every hour, MIP optionally supports <strong>refresh tokens</strong> — a longer-lived
+value that can be traded in for a new session without repeating the whole
+verification dance. If a refresh token is ever used twice (a sign it may have
+been stolen), the backend treats that as a red flag and revokes everything
+tied to it.</p>
+<h2 id="linking-accounts-optional">Linking accounts (optional)<a class="headerlink" href="#linking-accounts-optional" title="Permanent link">&para;</a></h2>
+<p>Some backends already have their own account system (email/password, etc.)
+and want to let a player <em>attach</em> a Minecraft account to an existing account,
+rather than create a brand-new session for it — useful for supporting
+multiple Minecraft accounts per user, for example. MIP supports this as an
+optional add-on: the same verification flows run, but the end result is "link
+this Minecraft account to my existing account" instead of "log me in as a
+new session."</p>
+<h2 id="security-in-plain-terms">Security, in plain terms<a class="headerlink" href="#security-in-plain-terms" title="Permanent link">&para;</a></h2>
+<p>A few of the more important protections baked into the design:</p>
+<ul>
+<li><strong>One-time-use everything.</strong> Challenges, login codes, and tokens can each
+  only be used once. Capturing a copy of a request in transit shouldn't let
+  anyone replay it later.</li>
+<li><strong>Nothing sensitive in URLs.</strong> Secrets travel in request bodies, not query
+  strings — URLs have a habit of ending up in logs, browser history, and
+  proxy records.</li>
+<li><strong>A subtle relay attack, and how it's handled.</strong> There's a known trick
+  where an attacker requests a challenge for themselves, then tricks a victim
+  into unknowingly "using" that challenge just by having the victim connect
+  to the attacker's own Minecraft server — a completely ordinary action from
+  the victim's point of view. MIP addresses this by having the backend check
+  that the network address doing the verifying matches the one that actually
+  did the in-game join, the same protection real Minecraft servers already
+  use against proxy-relay tricks.</li>
+<li><strong>Consistent error responses.</strong> When something goes wrong, the backend
+  gives the same answer whether a challenge didn't exist, expired, or was
+  already used — so an attacker probing the system can't learn anything
+  useful from the difference.</li>
+<li><strong>No favoritism between login methods.</strong> As noted above, in-game and
+  browser verification are equally valid; nothing downstream should
+  special-case one as weaker.</li>
+</ul>
+<h2 id="whats-optional-vs-required">What's optional vs. required<a class="headerlink" href="#whats-optional-vs-required" title="Permanent link">&para;</a></h2>
+<p>A backend can support just one of the two login flows, or both. Refresh
+tokens, account linking, and a couple of convenience endpoints (like fetching
+a player's profile info separately) are all optional add-ons on top of the
+core protocol — a backend can pick and choose based on what it actually
+needs, as long as whatever it does implement follows the spec exactly rather
+than a partial or modified version of it.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.sections", "navigation.top", "toc.follow", "content.action.edit", "content.code.copy"], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
