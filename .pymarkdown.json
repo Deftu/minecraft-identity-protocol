@@ -1,0 +1,21 @@
+{
+  "$comment": "Tuned to the spec's already-established prose-wrap width and formatting conventions (docs/spec/index.md), not the tool's generic defaults. Normative spec text is not reformatted to satisfy a linter — the linter is configured to match it.",
+  "plugins": {
+    "md013": {
+      "line_length": 110,
+      "code_blocks": false
+    },
+    "md022": {
+      "enabled": false,
+      "$comment": "Appendix C.1-C.5 and every numbered subsection in §8 intentionally place prose directly under a heading with no blank line — a consistent, deliberate style used dozens of times, not an oversight."
+    },
+    "md040": {
+      "enabled": false,
+      "$comment": "The §3 ASCII architecture diagram fence has no language; not worth annotating a plain-text box diagram just to satisfy this rule."
+    },
+    "md031": {
+      "enabled": false,
+      "$comment": "Appendix B's `400 Bad Request` status-code label sits directly above each JSON fence with no blank line, consistently across all five worked error responses — a deliberate compact pairing, not an oversight."
+    }
+  }
+}

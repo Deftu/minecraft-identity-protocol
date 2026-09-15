@@ -1,0 +1,6 @@
+{
+  "session_token": "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwNjlhNzlmNC00NGU5LTQ3MjYtYTViZS1mY2E5MGUzOGFhZjUifQ.UmVmcmVzaGVkU2lnbmF0dXJlRXhhbXBsZQ",
+  "token_type": "bearer",
+  "expires_in": 3600,
+  "refresh_token": "a1c9e7b2d4560f3a1c9e7b2d4560f3a1c9e7b2d4560f3a1c9e7b2d4560f3a1c"
+}

@@ -1,0 +1,4 @@
+{
+  "error": "upstream_unavailable",
+  "error_description": "The identity provider could not be reached."
+}

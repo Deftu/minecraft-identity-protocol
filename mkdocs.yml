@@ -1,0 +1,58 @@
+site_name: Minecraft Identity Protocol
+site_description: >-
+  A backend-agnostic protocol for authenticating a Minecraft account over HTTP.
+site_url: https://deftu.github.io/minecraft-identity-protocol/
+repo_url: https://github.com/Deftu/minecraft-identity-protocol
+repo_name: Deftu/minecraft-identity-protocol
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.top
+    - toc.follow
+    - content.action.edit
+    - content.code.copy
+
+extra:
+  version:
+    provider: mike
+
+nav:
+  - Overview: index.md
+  - Specification: spec/index.md
+  - Changelog: changelog.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.snippets:
+      base_path: ["."]
+      check_paths: true
+  - tables
+  - footnotes
+
+plugins:
+  - search

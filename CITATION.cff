@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you reference or implement this protocol, please cite it as below."
+title: "Minecraft Identity Protocol (MIP)"
+abstract: >-
+  A backend-agnostic protocol for authenticating a Minecraft account over HTTP, either from
+  inside a game client/mod or from a plain browser, converging on one identity representation
+  and one session-issuance step.
+authors:
+  - family-names: Deftu
+    email: me@deftu.dev
+url: "https://github.com/Deftu/minecraft-identity-protocol"
+license: Apache-2.0
+version: 1.0
+date-released: 2026-09-15

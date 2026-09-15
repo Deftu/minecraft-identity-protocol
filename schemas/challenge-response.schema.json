@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://deftu.github.io/minecraft-identity-protocol/schemas/challenge-response.schema.json",
+  "title": "MIP Flow A Challenge Response",
+  "description": "POST {session_challenge_endpoint} success response (§5.1).",
+  "type": "object",
+  "properties": {
+    "server_id": {
+      "type": "string",
+      "description": "CSPRNG-generated, lowercase unsigned hex, exactly 16 characters. Deliberately not vanilla's joinServer format (§5.1).",
+      "pattern": "^[0-9a-f]{16}$"
+    },
+    "attempt_id": {
+      "type": "string",
+      "description": "Separate CSPRNG value, >= 128 bits, base64url or hex. A bearer secret — MUST NOT appear in a URL, MUST NOT be logged (§5.1).",
+      "pattern": "^[A-Za-z0-9_-]+$",
+      "minLength": 22
+    },
+    "expires_in": {
+      "type": "integer",
+      "description": "Seconds until the challenge expires. RECOMMENDED 30, MUST NOT exceed 120 (§5.1).",
+      "minimum": 1,
+      "maximum": 120
+    }
+  },
+  "required": ["server_id", "attempt_id", "expires_in"],
+  "additionalProperties": false
+}

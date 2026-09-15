@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://deftu.github.io/minecraft-identity-protocol/schemas/verify-request.schema.json",
+  "title": "MIP Flow A Verify Request",
+  "description": "POST {session_verify_endpoint} request body (§5.3). MUST be a request body — never a URL query/path segment (§8.3).",
+  "type": "object",
+  "properties": {
+    "username": { "type": "string" },
+    "server_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$"
+    },
+    "attempt_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]+$",
+      "minLength": 22
+    },
+    "link_token": {
+      "type": "string",
+      "description": "OPTIONAL, §10.2 only. Single-use, short-lived, minted by the RP's own existing auth system."
+    }
+  },
+  "required": ["username", "server_id", "attempt_id"],
+  "additionalProperties": false
+}

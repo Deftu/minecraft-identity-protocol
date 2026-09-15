@@ -1,0 +1,16 @@
+{
+  "mip_version": "1.0",
+  "issuer": "https://api.example.com",
+  "supported_flows": ["session", "oauth"],
+  "session_challenge_endpoint": "https://api.example.com/mip/session/challenge",
+  "session_verify_endpoint": "https://api.example.com/mip/session/verify",
+  "oauth_authorize_endpoint": "https://api.example.com/mip/oauth/authorize",
+  "oauth_callback_endpoint": "https://api.example.com/mip/oauth/callback",
+  "oauth_token_endpoint": "https://api.example.com/mip/oauth/token",
+  "session_token_transport": ["cookie", "bearer"],
+  "jwks_uri": "https://api.example.com/mip/.well-known/jwks.json",
+  "session_refresh_endpoint": "https://api.example.com/mip/session/refresh",
+  "session_revoke_endpoint": "https://api.example.com/mip/session/revoke",
+  "userinfo_endpoint": "https://api.example.com/mip/userinfo",
+  "supports_linking": true
+}

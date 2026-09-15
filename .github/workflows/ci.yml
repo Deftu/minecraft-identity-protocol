@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - run: pip install -r requirements.txt
+
+      - name: Validate schemas and examples
+        run: python scripts/validate_examples.py
+
+      - name: Check internal spec cross-references
+        run: python scripts/check_references.py
+
+      - name: RFC 2119 keyword usage (advisory)
+        run: python scripts/check_rfc2119.py
+
+      - name: Markdown lint
+        run: >
+          pymarkdown --config .pymarkdown.json scan -r docs/
+          README.md CONTRIBUTING.md SECURITY.md CHANGELOG.md
+
+      - name: Build docs site (strict)
+        run: mkdocs build --strict

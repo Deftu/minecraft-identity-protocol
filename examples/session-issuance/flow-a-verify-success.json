@@ -1,0 +1,15 @@
+{
+  "session_token": "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwNjlhNzlmNC00NGU5LTQ3MjYtYTViZS1mY2E5MGUzOGFhZjUifQ.SGVsbG9Xb3JsZFNpZ25hdHVyZUV4YW1wbGU",
+  "token_type": "bearer",
+  "expires_in": 3600,
+  "refresh_token": "8f3a1c9e7b2d4560a1c9e7b2d4560f3a1c9e7b2d4560f3a1c9e7b2d4560f3a1",
+  "principal": {
+    "sub": "069a79f4-44e9-4726-a5be-fca90e38aaf5",
+    "preferred_username": "Notch",
+    "profile_actions": [],
+    "verification": {
+      "method": "session",
+      "verified_at": "2026-09-14T18:04:00Z"
+    }
+  }
+}

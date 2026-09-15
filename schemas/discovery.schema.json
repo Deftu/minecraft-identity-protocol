@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://deftu.github.io/minecraft-identity-protocol/schemas/discovery.schema.json",
+  "title": "MIP Discovery Document",
+  "description": "GET /.well-known/minecraft-identity-protocol (Appendix A).",
+  "type": "object",
+  "properties": {
+    "mip_version": {
+      "type": "string",
+      "description": "MUST match this document's own version string exactly, including a -draft suffix while one is carried."
+    },
+    "issuer": { "type": "string", "format": "uri" },
+    "supported_flows": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["session", "oauth"] },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "session_challenge_endpoint": { "type": "string", "format": "uri" },
+    "session_verify_endpoint": { "type": "string", "format": "uri" },
+    "oauth_authorize_endpoint": { "type": "string", "format": "uri" },
+    "oauth_callback_endpoint": { "type": "string", "format": "uri" },
+    "oauth_token_endpoint": {
+      "type": "string",
+      "format": "uri",
+      "description": "REQUIRED in this document if the RP supports §6.1's client-held-token variant; omitted otherwise."
+    },
+    "session_token_transport": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["cookie", "bearer"] },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "jwks_uri": {
+      "type": "string",
+      "format": "uri",
+      "description": "REQUIRED if the RP issues JWT session tokens (§7.2); omitted otherwise."
+    },
+    "session_refresh_endpoint": {
+      "type": "string",
+      "format": "uri",
+      "description": "REQUIRED if the RP supports §9; omitted otherwise."
+    },
+    "session_revoke_endpoint": {
+      "type": "string",
+      "format": "uri",
+      "description": "REQUIRED if the RP uses opaque tokens or otherwise supports §7.4; omitted otherwise."
+    },
+    "userinfo_endpoint": {
+      "type": "string",
+      "format": "uri",
+      "description": "REQUIRED if the RP supports §7.5; omitted otherwise."
+    },
+    "supports_linking": {
+      "type": "boolean",
+      "description": "OPTIONAL. MAY be explicitly false rather than only omitted. An RP supporting §10.2 MUST set true."
+    }
+  },
+  "required": ["mip_version", "issuer", "supported_flows"],
+  "additionalProperties": false
+}

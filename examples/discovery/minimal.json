@@ -1,0 +1,8 @@
+{
+  "mip_version": "1.0",
+  "issuer": "https://mods-backend.example.net",
+  "supported_flows": ["session"],
+  "session_challenge_endpoint": "https://mods-backend.example.net/mip/session/challenge",
+  "session_verify_endpoint": "https://mods-backend.example.net/mip/session/verify",
+  "session_token_transport": ["bearer"]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://deftu.github.io/minecraft-identity-protocol/schemas/session-issuance-response.schema.json",
+  "title": "MIP Session Issuance Response (bearer transport)",
+  "description": "Flow A's /verify success body (§7.1), and §9's refresh success for the native/bearer case (identical minus 'principal', which the Client already holds). Cookie-transport successes (Flow B /callback, browser refresh) carry no body-level token fields — see §7.1 — and are not covered by this schema.",
+  "type": "object",
+  "properties": {
+    "session_token": { "type": "string" },
+    "token_type": { "const": "bearer" },
+    "expires_in": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Seconds until session_token expires."
+    },
+    "refresh_token": {
+      "type": "string",
+      "description": "MUST be present if the RP supports §9, MUST be absent otherwise."
+    },
+    "principal": {
+      "$ref": "principal.schema.json",
+      "description": "REQUIRED for Flow A's /verify success. Absent on a §9 refresh response — the Client already holds it from the original verification."
+    }
+  },
+  "required": ["session_token", "token_type", "expires_in"],
+  "additionalProperties": false
+}

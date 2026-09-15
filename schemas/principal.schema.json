@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://deftu.github.io/minecraft-identity-protocol/schemas/principal.schema.json",
+  "title": "MIP Principal",
+  "description": "The Principal shape defined in SPEC.md §4. An intermediate, in-process value — never handed to a Client directly as something to build a session out of (see §7.1 for the one exception).",
+  "type": "object",
+  "properties": {
+    "sub": {
+      "type": "string",
+      "description": "Account UUID, lowercase, RFC 4122 dashed string form. The only stable identity key (§4).",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "preferred_username": {
+      "type": "string",
+      "description": "What the IdP returned at verification time. MUST NOT be a Client-supplied value (§4)."
+    },
+    "textures": {
+      "description": "OPTIONAL. MUST be null/absent, not fabricated, when the IdP didn't return texture data (§4).",
+      "type": ["object", "null"],
+      "properties": {
+        "skin": {
+          "description": "OPTIONAL, independently of cape. MUST be null/absent if the IdP didn't return a skin.",
+          "type": ["object", "null"],
+          "properties": {
+            "url": { "type": "string", "format": "uri" },
+            "slim": { "type": "boolean" }
+          },
+          "required": ["url", "slim"],
+          "additionalProperties": false
+        },
+        "cape": {
+          "description": "OPTIONAL, independently of skin. MUST be null/absent if the IdP didn't return a cape.",
+          "type": ["object", "null"],
+          "properties": {
+            "url": { "type": "string", "format": "uri" }
+          },
+          "required": ["url"],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "textures_property": {
+      "description": "OPTIONAL. Raw base64 value/signature pair exactly as returned by the IdP, unmodified. MUST be null/absent when the IdP didn't return it (§4).",
+      "type": ["object", "null"],
+      "properties": {
+        "value": { "type": "string" },
+        "signature": { "type": "string" }
+      },
+      "required": ["value", "signature"],
+      "additionalProperties": false
+    },
+    "profile_actions": {
+      "type": "array",
+      "description": "MUST default to an empty array, never null (§4).",
+      "default": [],
+      "items": { "type": "string" }
+    },
+    "verification": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["session", "oauth"],
+          "description": "Neither method is more or less trusted than the other (§4)."
+        },
+        "verified_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "RFC 3339 UTC timestamp, Z suffix, not a numeric offset (§4)."
+        }
+      },
+      "required": ["method", "verified_at"],
+      "additionalProperties": false
+    },
+    "mode": {
+      "type": "string",
+      "description": "Appendix C.2 only. A production Principal MUST NOT include this field at all — its absence, not a specific value, is what signals production. Consumers MUST treat ANY mode value as unsafe."
+    }
+  },
+  "required": ["sub", "preferred_username", "profile_actions", "verification"],
+  "additionalProperties": false
+}

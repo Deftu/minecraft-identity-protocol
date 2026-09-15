@@ -1,0 +1,65 @@
+{
+  "$comment": "Maps each example payload to the schema it must validate against. Read and enforced by scripts/validate_examples.py in CI.",
+  "entries": [
+    {
+      "example": "examples/principal/session-with-textures.json",
+      "schema": "schemas/principal.schema.json"
+    },
+    {
+      "example": "examples/principal/oauth-no-textures.json",
+      "schema": "schemas/principal.schema.json"
+    },
+    {
+      "example": "examples/principal/development-mode.json",
+      "schema": "schemas/principal.schema.json"
+    },
+    {
+      "example": "examples/discovery/full.json",
+      "schema": "schemas/discovery.schema.json"
+    },
+    {
+      "example": "examples/discovery/minimal.json",
+      "schema": "schemas/discovery.schema.json"
+    },
+    {
+      "example": "examples/errors/invalid_challenge.json",
+      "schema": "schemas/error.schema.json"
+    },
+    {
+      "example": "examples/errors/verification_failed.json",
+      "schema": "schemas/error.schema.json"
+    },
+    {
+      "example": "examples/errors/invalid_request.json",
+      "schema": "schemas/error.schema.json"
+    },
+    {
+      "example": "examples/errors/rate_limited.json",
+      "schema": "schemas/error.schema.json"
+    },
+    {
+      "example": "examples/errors/upstream_unavailable.json",
+      "schema": "schemas/error.schema.json"
+    },
+    {
+      "example": "examples/session-challenge/response.json",
+      "schema": "schemas/challenge-response.schema.json"
+    },
+    {
+      "example": "examples/session-verify/request.json",
+      "schema": "schemas/verify-request.schema.json"
+    },
+    {
+      "example": "examples/session-issuance/flow-a-verify-success.json",
+      "schema": "schemas/session-issuance-response.schema.json"
+    },
+    {
+      "example": "examples/session-issuance/refresh-native-success.json",
+      "schema": "schemas/session-issuance-response.schema.json"
+    },
+    {
+      "example": "examples/linking/link-success.json",
+      "schema": "schemas/link-response.schema.json"
+    }
+  ]
+}

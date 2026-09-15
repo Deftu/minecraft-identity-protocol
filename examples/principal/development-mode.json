@@ -1,0 +1,10 @@
+{
+  "sub": "00000000-0000-0000-0000-000000000001",
+  "preferred_username": "DevPlayer",
+  "profile_actions": [],
+  "verification": {
+    "method": "session",
+    "verified_at": "2026-09-14T20:00:00Z"
+  },
+  "mode": "development"
+}

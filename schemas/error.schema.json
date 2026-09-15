@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://deftu.github.io/minecraft-identity-protocol/schemas/error.schema.json",
+  "title": "MIP Error Response",
+  "description": "The shared error body shape used throughout the spec (Appendix B). Status codes listed there are RECOMMENDED, not part of this body schema.",
+  "type": "object",
+  "properties": {
+    "error": {
+      "type": "string",
+      "description": "A short machine-readable error code, e.g. invalid_challenge, verification_failed, invalid_request, rate_limited, upstream_unavailable, already_linked (§10.2). Not a closed enum — an RP MAY define additional error codes.",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "error_description": {
+      "type": "string",
+      "description": "Human-readable, implementation-specific copy."
+    }
+  },
+  "required": ["error", "error_description"],
+  "additionalProperties": false
+}

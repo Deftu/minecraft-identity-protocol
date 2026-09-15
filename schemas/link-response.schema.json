@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://deftu.github.io/minecraft-identity-protocol/schemas/link-response.schema.json",
+  "title": "MIP Account Linking Response",
+  "description": "Flow A /verify and §6.1's oauth_token_endpoint success response when a link_token was present (§10.2). A distinct linking result, not a session — no Identity Session is issued for a linking request.",
+  "type": "object",
+  "properties": {
+    "linked": { "const": true },
+    "sub": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    }
+  },
+  "required": ["linked", "sub"],
+  "additionalProperties": false
+}

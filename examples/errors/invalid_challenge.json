@@ -1,0 +1,4 @@
+{
+  "error": "invalid_challenge",
+  "error_description": "Unknown, expired, or already-used challenge."
+}

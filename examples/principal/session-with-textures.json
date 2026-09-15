@@ -1,0 +1,22 @@
+{
+  "sub": "069a79f4-44e9-4726-a5be-fca90e38aaf5",
+  "preferred_username": "Notch",
+  "textures": {
+    "skin": {
+      "url": "https://textures.minecraft.net/texture/1a4af718455d4aab528e7a61f86fa25e6a369d1768dcb13f7df319a713eb810",
+      "slim": false
+    },
+    "cape": {
+      "url": "https://textures.minecraft.net/texture/2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933"
+    }
+  },
+  "textures_property": {
+    "value": "eyJ0aW1lc3RhbXAiOjE3MjY0MDAwMDAwMDAsInByb2ZpbGVJZCI6IjA2OWE3OWY0NDRlOTQ3MjZhNWJlZmNhOTBlMzhhYWY1IiwicHJvZmlsZU5hbWUiOiJOb3RjaCIsInRleHR1cmVzIjp7fX0=",
+    "signature": "Yl8j3aB2cE5fG7hI9jK1lM3nO5pQ7rS9tU1vW3xY5zA7bC9dE1fG3hI5jK7lM9nO1pQ3rS5tU7vW9xY1zA3bC5dE7fG9hI1jK3lM5nO7pQ9rS1tU3vW5xY7zA9=="
+  },
+  "profile_actions": [],
+  "verification": {
+    "method": "session",
+    "verified_at": "2026-09-14T18:04:00Z"
+  }
+}
