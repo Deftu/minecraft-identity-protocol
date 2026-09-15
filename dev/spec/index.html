@@ -1320,7 +1320,7 @@
 
 
 <h1 id="minecraft-identity-protocol-mip">Minecraft Identity Protocol (MIP)<a class="headerlink" href="#minecraft-identity-protocol-mip" title="Permanent link">&para;</a></h1>
-<p><strong>Version:</strong> 1.0-draft
+<p><strong>Version:</strong> 1.0
 <strong>Status:</strong> Draft — not yet implemented anywhere.</p>
 <h2 id="0-status-of-this-document">0. Status of this document<a class="headerlink" href="#0-status-of-this-document" title="Permanent link">&para;</a></h2>
 <p>This is the sole normative source for MIP. It is backend- and language-agnostic: any HTTP
@@ -2182,7 +2182,7 @@ or divergently implemented.</p>
 specified is not a conformance claim.</p>
 <h2 id="12-versioning-extensibility">12. Versioning &amp; Extensibility<a class="headerlink" href="#12-versioning-extensibility" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Versioned <code>MAJOR.MINOR</code>. This document is <code>1.0-draft</code>.</li>
+<li>Versioned <code>MAJOR.MINOR</code>. This document is <code>1.0</code>.</li>
 <li>A discovery document (Appendix A) advertises <code>mip_version</code>. Clients MUST ignore unknown
   fields in any MIP response — this is how minor versions add optional data without
   breaking existing clients.</li>
@@ -2205,7 +2205,7 @@ what's implemented as informative, not current state.</p>
 without hardcoding paths, mirroring OIDC discovery:</p>
 <p><code>GET /.well-known/minecraft-identity-protocol</code></p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">"mip_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0-draft"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"mip_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">"issuer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.example.com"</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">"supported_flows"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"session"</span><span class="p">,</span><span class="w"> </span><span class="s2">"oauth"</span><span class="p">],</span>
 <span class="w">  </span><span class="nt">"session_challenge_endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.example.com/mip/session/challenge"</span><span class="p">,</span>
@@ -2222,10 +2222,9 @@ without hardcoding paths, mirroring OIDC discovery:</p>
 <span class="w">  </span><span class="nt">"supports_linking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><code>mip_version</code> MUST match this document's own version string exactly, including the
-<code>-draft</code> suffix while this document carries one — an implementation of this draft
-advertises <code>"1.0-draft"</code>, not <code>"1.0"</code>. A future non-draft 1.0 release drops the suffix; see
-§12.</p>
+<p><code>mip_version</code> MUST match this document's own version string exactly. A draft revision's
+version string carries a <code>-draft</code> suffix (e.g. <code>1.1-draft</code>); a finalized release, like this
+one, does not. See §12.</p>
 <p><code>jwks_uri</code> is REQUIRED if the RP issues JWT session tokens (§7.2); omitted otherwise.
 <code>oauth_token_endpoint</code> is REQUIRED if the RP supports §6.1's client-held-token variant;
 omitted otherwise — its absence is how a Client knows not to attempt that variant.
